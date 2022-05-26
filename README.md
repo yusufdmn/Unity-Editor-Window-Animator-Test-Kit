@@ -1,7 +1,9 @@
 # Animation Test Kit
 
 It is an Unity Editor Window to test animators by changing their parameters easily.
+
 It can be used to test any animator.
+
 The Test window can be displayed only in Play Mode.
 
 Sample View:
