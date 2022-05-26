@@ -21,8 +21,8 @@ public class AnimatorTestEditor : EditorWindow
     static bool Test()
     {
         if(Selection.count == 1)
-        {
-            if (Selection.activeGameObject.GetComponent<Animator>() != null)
+        {                                     // It can be open only when selected gameobject has animator and  in PLAY MODE
+            if (Selection.activeGameObject.GetComponent<Animator>() != null  && Application.isPlaying)
                 return true;
         }
 
@@ -44,7 +44,7 @@ public class AnimatorTestEditor : EditorWindow
     GUIStyle style = new GUIStyle();
 
 
-    private void Awake()
+    private void Awake()        // Get the parameters of the animator and keep them in different lists to display them in order later (Int, float, bool, trigger)
     {
         parameters = null;
 
@@ -55,10 +55,10 @@ public class AnimatorTestEditor : EditorWindow
 
         _gameObject = Selection.activeGameObject;
 
-        animator = _gameObject.GetComponent<Animator>();
 
-        if(animator != null)
+        if(_gameObject.GetComponent<Animator>() != null)
         {
+            animator = _gameObject.GetComponent<Animator>();
             parameters = animator.parameters;
 
             foreach (AnimatorControllerParameter parameter in parameters)
@@ -80,22 +80,26 @@ public class AnimatorTestEditor : EditorWindow
 
     }
 
-
     private void OnGUI()
     {
-
         SetLabelStyle();
+
+        if (!Application.isPlaying) {       // Close the window when PLAY MODE is off
+            this.Close();
+            return;
+        }
+
 
         if (Selection.activeGameObject != _gameObject)  // Change Parameters if another object is selected 
             Awake();
 
 
-        if (_gameObject != null)
+        if (_gameObject != null)        // Create the required GUI in order
         {
             string titleIInt = "Int Parameters";
             AddTitleLabel(titleIInt, parametersInt,1);
 
-            foreach (AnimatorControllerParameter parameterInt in parametersInt)
+            foreach (AnimatorControllerParameter parameterInt in parametersInt)     // Create int fields
             {
                 CreateIntField(parameterInt.name);
             }
@@ -103,7 +107,7 @@ public class AnimatorTestEditor : EditorWindow
             string titleFloat = "Float Parameters";
             AddTitleLabel(titleFloat, parametersFloat,3);
 
-            foreach (AnimatorControllerParameter parameterFloat in parametersFloat)
+            foreach (AnimatorControllerParameter parameterFloat in parametersFloat)     // Create float fields
             {
                 CreateFloatSlider(parameterFloat.name);
             }
@@ -111,7 +115,7 @@ public class AnimatorTestEditor : EditorWindow
             string titleBool = "Bool Parameters";
             AddTitleLabel(titleBool, parametersBool, 3);
 
-            foreach (AnimatorControllerParameter parameterBool in parametersBool)
+            foreach (AnimatorControllerParameter parameterBool in parametersBool)        // Create bool fields
             {
                 CreateBoolToggle(parameterBool.name);
             }
@@ -119,7 +123,7 @@ public class AnimatorTestEditor : EditorWindow
             string titleTrigger = "Trigger Parameters";
             AddTitleLabel(titleTrigger, parametersTrigger, 3);
 
-            foreach (AnimatorControllerParameter parameterTrigger in parametersTrigger)
+            foreach (AnimatorControllerParameter parameterTrigger in parametersTrigger)      // Create trigger fields
             {
                 CreateTriggerButton(parameterTrigger.name);
             }
@@ -140,7 +144,7 @@ public class AnimatorTestEditor : EditorWindow
     void AddTitleLabel(string title, ArrayList array, float space)
     {
         GUILayout.Space(space);
-        if (array.Count > 0)
+        if (array != null && array.Count > 0)
         {
             GUILayout.Label(title);
         }
