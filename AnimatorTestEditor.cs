@@ -40,9 +40,9 @@ public class AnimatorTestEditor : EditorWindow
     ArrayList parametersBool;
     ArrayList parametersTrigger;
 
-
     GUIStyle style = new GUIStyle();
-
+    Vector2 scrollPos;
+    
 
     private void Awake()        // Get the parameters of the animator and keep them in different lists to display them in order later (Int, float, bool, trigger)
     {
@@ -82,6 +82,9 @@ public class AnimatorTestEditor : EditorWindow
 
     private void OnGUI()
     {
+        EditorGUILayout.BeginVertical();
+        scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+        
         SetLabelStyle();
 
         if (!Application.isPlaying) {       // Close the window when PLAY MODE is off
@@ -89,10 +92,8 @@ public class AnimatorTestEditor : EditorWindow
             return;
         }
 
-
         if (Selection.activeGameObject != _gameObject)  // Change Parameters if another object is selected 
             Awake();
-
 
         if (_gameObject != null)        // Create the required GUI in order
         {
@@ -130,7 +131,8 @@ public class AnimatorTestEditor : EditorWindow
 
         }
 
-
+        EditorGUILayout.EndScrollView();
+        EditorGUILayout.EndVertical();
     }
 
     void SetLabelStyle()
