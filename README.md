@@ -1,4 +1,4 @@
-# Animation Test Kit
+# Animator Test Kit
 
 It is an Unity Editor Window to test animators by changing their parameters easily.
 
