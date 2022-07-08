@@ -7,7 +7,7 @@ using UnityEditor.Animations;
 public class AnimatorTestEditor : EditorWindow
 {
 
-    [MenuItem("GameObject/AnimatorTestEditor",false,10)]
+    [MenuItem("GameObject/Animator Test Editor",false,10)]
     static void Init()
     {
         if(Selection.count == 1)
@@ -17,7 +17,7 @@ public class AnimatorTestEditor : EditorWindow
         }
     }
 
-    [MenuItem("GameObject/AnimatorTestEditor", true,10)]
+    [MenuItem("GameObject/Animator Test Editor", true,10)]
     static bool Test()
     {
         if(Selection.count == 1)
@@ -98,7 +98,7 @@ public class AnimatorTestEditor : EditorWindow
         if (_gameObject != null)        // Create the required GUI in order
         {
             string titleIInt = "Int Parameters";
-            AddTitleLabel(titleIInt, parametersInt,1);
+            AddTitleLabel(titleIInt, parametersInt, 1);
 
             foreach (AnimatorControllerParameter parameterInt in parametersInt)     // Create int fields
             {
@@ -106,7 +106,7 @@ public class AnimatorTestEditor : EditorWindow
             }
 
             string titleFloat = "Float Parameters";
-            AddTitleLabel(titleFloat, parametersFloat,3);
+            AddTitleLabel(titleFloat, parametersFloat, 3);
 
             foreach (AnimatorControllerParameter parameterFloat in parametersFloat)     // Create float fields
             {
