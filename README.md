@@ -1,10 +1,12 @@
 # Animator Test Kit
 
-It is an Unity Editor Window to test animators by changing their parameters easily.
+My medium article about making Unity Editor Windows:  
+https://medium.com/@yusuf_duman/how-to-make-customizable-editor-windows-simply-in-unity-6381e9ff311f
 
-It can be used to test any animator.
 
-The Test window can be displayed only in Play Mode.
+It is an Unity Editor Window to test animators by changing their parameters easily.  
+It can be used to test any animator.  
+The Test window can be displayed only in Play Mode.  
 
 Sample View:
  
